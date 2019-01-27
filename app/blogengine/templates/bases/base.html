@@ -49,13 +49,29 @@
   </div>
 </div>
 
+{% if request.user.is_authenticated and request.user.is_staff %}
 <div class="admin-panel align-items-center">
     <a href="/admin" class="btn btn-outline-info">Admin</a>
     {% block admin-panel %}
-        <a href="" class="btn btn-light">Create</a>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Create
+    </button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{% url 'post_create_url' %}">Post</a>
+      <a class="dropdown-item" href="{% url 'tag_create_url' %}">Create</a>
+  </div>
+</div>
         <a href="{{admin_object.get_update_url}}" style="{% if detail %}display: block;{% endif%}"class="btn btn-light edit" >Edit</a>
         <a href="{{admin_object.get_delete_url}}" class="btn btn-danger delete" style="{% if detail %}display: block;{% endif%}">Delete</a>
     {% endblock %}
+
 </div>
+  {% endif %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock %}
 </body>
 </html>

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Post,Tag
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from blog.utils import (
                     ObjectDetailMixin,
                     ObjectCreateMixin,
@@ -23,47 +24,48 @@ class PostDetail(ObjectDetailMixin,View):
     model = Post
     template = 'blog/post_detail.html'
 
-class PostDelete(ObjectDeleteMixin,View):
+class PostDelete(LoginRequiredMixin,ObjectDeleteMixin,View):
     model = Post
     redirect_url = 'post_list_url'
     template = 'blog/post_delete_form.html'
 
+    raise_exception = True
 
-
-class TagDelete(ObjectDeleteMixin,View):
+class TagDelete(LoginRequiredMixin,ObjectDeleteMixin,View):
     model = Tag
     redirect_url = 'tags_list_url'
     template = 'blog/tag_delete_form.html'
 
+    raise_exception = True
 
-
-class PostCreate(ObjectCreateMixin,View):
+class PostCreate(LoginRequiredMixin,ObjectCreateMixin,View):
     form_model = PostForm
     template = 'blog/post_create_form.html'
 
-
+    raise_exception = True
 class TagDetail(ObjectDetailMixin,View):
     model = Tag
     template = 'blog/tag_detail.html'
 
-
-class PostUpdate(ObjectUpdateMixin,View):
+class PostUpdate(LoginRequiredMixin,ObjectUpdateMixin,View):
     model = Post
     form_model = PostForm
     template = 'blog/post_update_form.html'
 
+    raise_exception = True
 
-
-class TagCreate(ObjectCreateMixin,View):
+class TagCreate(LoginRequiredMixin,ObjectCreateMixin,View):
     form_model = TagForm
     template = 'blog/tag_create.html'
 
+    raise_exceptions = True
 
-class TagUpdate(ObjectUpdateMixin,View):
+class TagUpdate(LoginRequiredMixin,ObjectUpdateMixin,View):
     model = Tag
     form_model = TagForm
     template = 'blog/tag_update_form.html'
 
+    raise_exceptions = True
 
 def tags_list(request):
     tags = Tag.objects.all()
