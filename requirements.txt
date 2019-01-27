@@ -1,0 +1,4 @@
+Django>=2
+Pillow
+psycopg2
+psycopg2-binary
