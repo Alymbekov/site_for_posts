@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-{% for post in posts %}
+{% for post in page_object.object_list %}
   {% include 'blog/includes/post_card.html' %}
     {% endfor %}
 

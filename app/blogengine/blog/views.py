@@ -14,11 +14,33 @@ from blog.utils import (
 from .forms import TagForm,PostForm
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 def post_list(request):
     posts = Post.objects.all()
-    return render(request,'blog/index.html',context={'posts':posts})
+    paginator = Paginator(posts,2)
+    page_number = request.GET.get('page',1)
+    page = paginator.get_page(page_number)
 
+    is_paginated = page.has_other_pages()
+
+    if page.has_previous():
+        previus_url = '?page={}'.format(page.previous_page_number())
+    else:
+        previus_url = ''
+    if page.has_next():
+        next_url = '?page={}'.format(page.next_page_number())
+    else:
+        next_url = ''
+
+    context = {
+        'page_object':page,
+        'is_paginated':is_paginated,
+        'next_url': next_url,
+        'previus_url':previus_url
+    }
+
+    return render(request,'blog/index.html',context=context)
 
 class PostDetail(ObjectDetailMixin,View):
     model = Post
@@ -41,8 +63,8 @@ class TagDelete(LoginRequiredMixin,ObjectDeleteMixin,View):
 class PostCreate(LoginRequiredMixin,ObjectCreateMixin,View):
     form_model = PostForm
     template = 'blog/post_create_form.html'
+    raise_exceptions = True
 
-    raise_exception = True
 class TagDetail(ObjectDetailMixin,View):
     model = Tag
     template = 'blog/tag_detail.html'
