@@ -20,5 +20,6 @@ from .views import redirect_blog
 urlpatterns = [
     path('',redirect_blog),
     path('admin/', admin.site.urls),
-    path('blog/',include('blog.urls'))
+    path('blog/',include('blog.urls')),
+    path('accounts/',include('django.contrib.auth.urls')),
 ]
