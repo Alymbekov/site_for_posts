@@ -57,6 +57,9 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR,'app','emails')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

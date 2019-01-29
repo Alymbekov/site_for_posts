@@ -1,0 +1,13 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: alymbekovdastan1@gmail.com
+Date: Tue, 29 Jan 2019 06:20:15 -0000
+Message-ID: <154874281541.4277.11904534643491528185@dastan>
+
+Someone asked for password reset for email alymbekovdastan1@gmail.com. Follow the link below:
+http://127.0.0.1:8000 /accounts/reset/Mg/53e-cb1932d2ca1b051bef09/
+
+-------------------------------------------------------------------------------
